@@ -1,7 +1,7 @@
 # LeetCodeManager
 This is a manager for leetcode issues based on Entity Framework, SQL Server and WinForm.
 
-##Readers
+## Readers
  - If you are interested and ready to get started for Entity Framework, esp many-to-many relationship issue;
  - If you are lost in management for Leetcode problems you have done;
  - If you want to study a new ORM Framework;
