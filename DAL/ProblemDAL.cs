@@ -18,6 +18,13 @@ namespace LeetcodeManager.DAL
             return tags.AsEnumerable<Tag>();
         }
 
+        public IEnumerable<Problem> QueryAllProblems()
+        {
+            DbSet<Problem> problems = _db.Problems;
+            if (problems == null) return new List<Problem>();
+            return problems.AsEnumerable<Problem>();
+        }
+
         public bool IsNew(Problem problem)
         {
             return problem.ProblemId == 0;
@@ -48,7 +55,8 @@ namespace LeetcodeManager.DAL
             int cnt = problems.Count();
             for(int i=0;i<cnt;i++)
             {
-                _db.Problems.Remove(problems[i]);
+                if(_db.Problems.Contains(problems[i]))
+                   _db.Problems.Remove(problems[i]);
             }
             _db.SaveChanges();
         }
