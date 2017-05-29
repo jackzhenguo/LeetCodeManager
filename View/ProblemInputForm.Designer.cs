@@ -39,12 +39,15 @@
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
+            this.label6 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(30, 58);
+            this.label1.Location = new System.Drawing.Point(220, 57);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(35, 17);
             this.label1.TabIndex = 0;
@@ -52,12 +55,11 @@
             // 
             // titleTxtbox
             // 
-            this.titleTxtbox.Location = new System.Drawing.Point(170, 55);
+            this.titleTxtbox.Location = new System.Drawing.Point(261, 55);
             this.titleTxtbox.Multiline = true;
             this.titleTxtbox.Name = "titleTxtbox";
-            this.titleTxtbox.Size = new System.Drawing.Size(364, 22);
+            this.titleTxtbox.Size = new System.Drawing.Size(273, 22);
             this.titleTxtbox.TabIndex = 1;
-            this.titleTxtbox.Text = "Leetcode problem title";
             // 
             // LtCodeTxtbox
             // 
@@ -66,7 +68,6 @@
             this.LtCodeTxtbox.Name = "LtCodeTxtbox";
             this.LtCodeTxtbox.Size = new System.Drawing.Size(364, 22);
             this.LtCodeTxtbox.TabIndex = 3;
-            this.LtCodeTxtbox.Text = "LeetCode problem Website";
             // 
             // label2
             // 
@@ -84,7 +85,6 @@
             this.contentTxtbox.Name = "contentTxtbox";
             this.contentTxtbox.Size = new System.Drawing.Size(501, 245);
             this.contentTxtbox.TabIndex = 4;
-            this.contentTxtbox.Text = "content of problem";
             // 
             // label3
             // 
@@ -102,7 +102,6 @@
             this.CsdnTxtbox.Name = "CsdnTxtbox";
             this.CsdnTxtbox.Size = new System.Drawing.Size(361, 22);
             this.CsdnTxtbox.TabIndex = 7;
-            this.CsdnTxtbox.Text = "CSDN WebSite Input";
             // 
             // label4
             // 
@@ -142,12 +141,35 @@
             this.label5.TabIndex = 11;
             this.label5.Text = "Tags";
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(33, 55);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(58, 17);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "Number";
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(98, 52);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            1000000,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(75, 22);
+            this.numericUpDown1.TabIndex = 13;
+            // 
             // ProblemInputForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(563, 510);
             this.ControlBox = false;
+            this.Controls.Add(this.numericUpDown1);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -162,6 +184,7 @@
             this.Name = "ProblemInputForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Problem Input";
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -180,5 +203,7 @@
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }

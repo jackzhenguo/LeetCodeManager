@@ -9,11 +9,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using Infragistics.Shared;
-using Infragistics.Win;
-using Infragistics.Win.UltraWinGrid;
 using LeetcodeManager.Lib;
 using LeetcodeManager.Controller;
+using Infragistics.Win.UltraWinGrid;
+using Infragistics.Win;
 
 namespace LeetcodeManager.View
 {
@@ -35,15 +34,19 @@ namespace LeetcodeManager.View
             Controls.Add(ultraCombo1);
             ultraCombo1.DataSource = _tagController.TagsToTable();
             fillUltraCombo();
+            numericUpDown1.ReadOnly = false;
         }
 
         public ProblemInputForm(Problem problem)
             : this()
         {
+            if(!string.IsNullOrEmpty(problem.Number))
+               numericUpDown1.Value = Convert.ToDecimal(problem.Number);
             titleTxtbox.Text = problem.Title;
             LtCodeTxtbox.Text = problem.LtUrl;
             CsdnTxtbox.Text = problem.CsdnAddress;
             contentTxtbox.Text = problem.Content;
+            numericUpDown1.ReadOnly = true;
         }
         public Problem InputProblem
         {
@@ -55,6 +58,17 @@ namespace LeetcodeManager.View
         //ok
         private void button1_Click(object sender, EventArgs e)
         {
+            _problem.Number = numericUpDown1.Value.ToString();
+            if(_problem.ProblemId==0) //new a problem
+            {
+                //check if question with same number has existed
+                var tmpprob = _problemController.GetAllProblems().FirstOrDefault(r => r.Number == _problem.Number);
+                if(tmpprob!=null)
+                {
+                   SysHelper.ShowMessageWarning(string.Format("question with number of {0} has existed!",tmpprob.Number));
+                    return;
+                }
+            }
             _problem.Title = titleTxtbox.Text;
             _problem.LtUrl = LtCodeTxtbox.Text;
             _problem.Content = contentTxtbox.Text;
