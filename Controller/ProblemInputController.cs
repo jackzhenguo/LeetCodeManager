@@ -2,6 +2,7 @@
 using LeetcodeManager.DAL;
 using LeetcodeManager.Entity;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
@@ -24,6 +25,14 @@ namespace LeetcodeManager.Controller
         {
             return _problemDal.CreateAProblem(problem);
         }
+        public Problem AddARelation(Problem p,Tag t)
+        {
+            Tag tt = p.Tags.FirstOrDefault(r => r.Name == t.Name);
+            if (tt != null) return p;
+            p.Tags.Add(t);
+            UpdateProblems();
+            return p;
+        }
         public void UpdateProblems()
         {
             _problemDal.UpdateProblems();
@@ -36,5 +45,22 @@ namespace LeetcodeManager.Controller
         {
             _problemDal.DeleteProblems(problems);
         }
+
+        public void DeleteALLProblems()
+        {
+            DeleteProblems(_problemDal.QueryAllProblems().ToList());
+        }
+
+        public IList<Problem> GetAllProblems()
+        {
+           var enumable = _problemDal.QueryAllProblems();
+           return enumable.ToList();       
+        }
+
+        public Problem GetAProblemByNumber(string number)
+        {
+            return GetAllProblems().FirstOrDefault(r => r.Number == number);
+        }
+        
     }
 }

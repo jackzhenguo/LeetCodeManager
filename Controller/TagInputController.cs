@@ -57,6 +57,15 @@ namespace LeetcodeManager.Controller
             _tagDAL.DeleteATag(tag);
         }
 
+        public void DeleteAllTags()
+        {
+           IEnumerable<Tag> tags = _tagDAL.QueryAllTags();
+            foreach(var tag in tags)
+            {
+                _tagDAL.DeleteATag(tag);
+            }
+        }
+
         public void UpdateTagName(Tag tag)
         {
             _tagDAL.UpdateATagName(tag);
