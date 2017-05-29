@@ -1,6 +1,7 @@
 # LeetCodeManager
-This is a manager for leetcode issues based on Entity Framework, SQL Server and WinForm.
-##Readers
+This is a manager for leetcode issues based on Entity Framework, SQL Server and WinForm.  
+
+## Readers
 
  - If you are interested and ready to get started for Entity Framework, esp many-to-many relationship issue;
  - If you are lost in management for Leetcode problems you have done;
@@ -8,7 +9,7 @@ This is a manager for leetcode issues based on Entity Framework, SQL Server and 
  - If you find a or many bugs;
  -  If you want to give me a suggestion
 
-##BackGround
+## BackGround
 This article is a practical description of the problem, which uses the Entity Framework, based on WinForm data binding technology, and the SQL Server database to manage LeetCode problems that we have done. **LeetCode manager** will manage problems according to  "**LeetCode tags**", such as *Array*, *HashTable*, *Stack*, *Tree*, *Graph* etc... Under each category problem can be created, deleted, modified, and one problem may be associated with multiple tags, so this is a typical instance used to solve many-to-many relationship.
 
 ![这里写图片描述](http://img.blog.csdn.net/20170529222843520?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZGFpZ3VhbHU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
@@ -29,9 +30,9 @@ Also include other folders:
  - **Migrations** are done with the package management console after making changes to the entity's attributes;
  - **Assembly**: third-party control: Infragistics UltraCombo control.
 
-##Details
+## Details
 Now, Let's introduce the folders we have involved above in detail.
-###Entity
+### Entity
 Building entity is based on Code First of EF. Entity folder includes following files: Problem entity and Tag entity.
 Problem Entity: 
 ```C#
@@ -62,7 +63,7 @@ Tag entity:
         public virtual IList<Problem> Problems { get; set; }
     }
 ```
-###DAL
+### DAL
 DAL is the abbreviation of Data Access Layer, and we can simplify the code with EF. Now, we look at DAL objects.
 First, it is MyDb object, which is inherited from ContextDb object: 
 
@@ -210,18 +211,18 @@ public class TagDAL:BaseDAL
         }
     }
 ```
-###Controller
+### Controller
 Here, controllers are not same to the controllers of MVC, but it's a bit of similar to that of MVC. It is the middle layer between DAL and View layer. I donot want to write it in detail here and you could look at it if you have some interest in it. Following is its structure: 
 
 ![这里写图片描述](http://img.blog.csdn.net/20170529222303287?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZGFpZ3VhbHU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
-###View
+### View
 Views are mainly including Index form, Tag input form, Problem input form. Here, I don't plan to write it in detail, because this is not the key point for this passage. 
-##Main Function
+## Main Function
 LeetcodeManager mainly manage to the Tag and Problems on the management of many-to-many relationship, including the Tag of the creation, deletion, modification; Problem of the creation, deletion, modification. In addition, problems sort in accordance with the number of problem in an ascending and descending order, and  can be filtered by the number of problem. Also a click can clear all the data in database; we have quickly import problems in accordance with a fixed format on the problems.
-##Next work
+## Next work
 Asp.net version is implemented.
-##Fork and Star
+## Fork and Star
 https://github.com/jackzhenguo/LeetCodeManager
 
 
