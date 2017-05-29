@@ -1,6 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -29,6 +32,9 @@ namespace LeetcodeManager.Lib
             return enumerable == null || enumerable.Count() == 0;
         }
 
-
+        public static string ReadFile(string path, string name)
+        {
+           return File.ReadAllText(Path.Combine(path, name), Encoding.ASCII);           
+        }
     }
 }
