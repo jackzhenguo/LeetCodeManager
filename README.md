@@ -1,5 +1,6 @@
 # LeetCodeManager
 This is a manager for leetcode issues based on Entity Framework, SQL Server and WinForm.
+
 ##Readers
 
  - If you are interested and ready to get started for Entity Framework, esp many-to-many relationship issue;
@@ -7,6 +8,11 @@ This is a manager for leetcode issues based on Entity Framework, SQL Server and 
  - If you want to study a new ORM Framework;
  - If you find a or many bugs;
  -  If you want to give me a suggestion
+ 
+ ## Install
+ - Visual Studio 2013
+ - .NET Framework 4.0+
+ - Nuget install, furthermore Entity framework.
 
 ##BackGround
 This article is a practical description of the problem, which uses the Entity Framework, based on WinForm data binding technology, and the SQL Server database to manage LeetCode problems that we have done. **LeetCode manager** will manage problems according to  "**LeetCode tags**", such as *Array*, *HashTable*, *Stack*, *Tree*, *Graph* etc... Under each category problem can be created, deleted, modified, and one problem may be associated with multiple tags, so this is a typical instance used to solve many-to-many relationship.
