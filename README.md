@@ -13,9 +13,11 @@ This is a manager for leetcode issues based on Entity Framework, SQL Server and 
 This article is a practical description of the problem, which uses the Entity Framework, based on WinForm data binding technology, and the SQL Server database to manage LeetCode problems that we have done. **LeetCode manager** will manage problems according to  "**LeetCode tags**", such as *Array*, *HashTable*, *Stack*, *Tree*, *Graph* etc... Under each category problem can be created, deleted, modified, and one problem may be associated with multiple tags, so this is a typical instance used to solve many-to-many relationship.
 
 ![这里写图片描述](http://img.blog.csdn.net/20170529222843520?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZGFpZ3VhbHU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
-##Software Structure
 
-![这里写图片描述](http://img.blog.csdn.net/20170529223348183?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZGFpZ3VhbHU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+## Software Structure
+
+![这里写图片描述](http://img.blog.csdn.net/20170529223348183?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvZGFpZ3VhbHU=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)  
+
 The main GUI of software is as follows, its main structure includes:
 
  - **Entity;**
