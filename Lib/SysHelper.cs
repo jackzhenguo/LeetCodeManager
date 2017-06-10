@@ -36,5 +36,10 @@ namespace LeetcodeManager.Lib
         {
            return File.ReadAllText(Path.Combine(path, name), Encoding.ASCII);           
         }
+
+        public static void WriteFile(string content,string path, string name)
+        {
+            File.WriteAllText(Path.Combine(path, name), content);
+        }
     }
 }

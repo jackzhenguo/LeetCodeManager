@@ -56,10 +56,10 @@
             // titleTxtbox
             // 
             this.titleTxtbox.Location = new System.Drawing.Point(261, 55);
-            this.titleTxtbox.Multiline = true;
             this.titleTxtbox.Name = "titleTxtbox";
             this.titleTxtbox.Size = new System.Drawing.Size(273, 22);
             this.titleTxtbox.TabIndex = 1;
+            this.titleTxtbox.WordWrap = false;
             // 
             // LtCodeTxtbox
             // 

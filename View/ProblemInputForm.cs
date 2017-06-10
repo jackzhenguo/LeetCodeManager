@@ -47,6 +47,22 @@ namespace LeetcodeManager.View
             CsdnTxtbox.Text = problem.CsdnAddress;
             contentTxtbox.Text = problem.Content;
             numericUpDown1.ReadOnly = true;
+            _problem = problem; //fix a bug
+            //fill combox
+            if(problem.Tags!=null)
+            {
+                foreach (var item in problem.Tags)
+                {
+                    foreach(var row in ultraCombo1.Rows)
+                    {
+                        if ((int)row.Cells["TagId"].Value == item.TagId)
+                        {
+                            row.Cells["Selected"].Value = true;
+                            break;
+                        }
+                    }
+                }
+            }
         }
         public Problem InputProblem
         {
@@ -78,13 +94,15 @@ namespace LeetcodeManager.View
                 MessageBox.Show("not select any tag! please create a new tag.");
                 return;
             }
+            if (_problem.Tags != null)
+                _problem.Tags.Clear();
             foreach (UltraGridRow row in this.ultraCombo1.CheckedRows)
-            {
-                var tag = _tagController.GetATagByName(row.Cells["Name"].Value.ToString());
-                if (_problem.Tags == null)
-                    _problem.Tags = new List<Tag>();
-                if (!_problem.Tags.Contains(tag))
-                    _problem.Tags.Add(tag);
+            {              
+                //if (!_problem.Tags.Contains(tag))
+                int tagid = (int)(row.ListObject as DataRowView).Row.ItemArray[0];
+                Tag retriveTag =_tagController.GetATagById(tagid);
+                if(retriveTag!=null) //write to log
+                  _problem.Tags.Add(retriveTag);
             }
 
             if (string.IsNullOrEmpty(_problem.Title))

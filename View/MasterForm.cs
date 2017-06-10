@@ -31,10 +31,10 @@ namespace LeetcodeManager.View
             var tags = _tagController.GetAllTags();
             TreeNode root = treeViewTag.Nodes[0];
             if (tags == null) return;
-            int index=0;
+            int index = 0;
             foreach (var tag in tags)
             {
-                TreeNode node = new TreeNode(tag.Name) { Tag = tag,ImageIndex =(index++)%5  };
+                TreeNode node = new TreeNode(tag.Name) { Tag = tag, ImageIndex = (index++) % 5 };
                 root.Nodes.Add(node);
             }
             treeViewTag.ExpandAll();
@@ -58,7 +58,7 @@ namespace LeetcodeManager.View
                 SysHelper.ShowMessageWarning("Existed tag with this name, create failure!");
                 return;
             }
-            tagdb =_tagController.SaveTagToDb(tag);
+            tagdb = _tagController.SaveTagToDb(tag);
             treeViewTag.Nodes[0].Nodes.Add(new TreeNode(input.InputTag) { Tag = tagdb });
             treeViewTag.ExpandAll();
         }
@@ -110,7 +110,7 @@ namespace LeetcodeManager.View
             }
             catch (Exception ex)
             {
-                MessageBox.Show("deletion failure"+"("+ex.Message+")");
+                MessageBox.Show("deletion failure" + "(" + ex.Message + ")");
             }
             treeViewTag.ExpandAll();
         }
@@ -148,7 +148,7 @@ namespace LeetcodeManager.View
         {
             this.Validate();
             if (DialogResult.No == SysHelper.ShowMessageYesOrNo("Are you sure to delete all problems in this grid?"))
-                return;           
+                return;
             IList<Problem> deletes = new List<Problem>();
             foreach (DataGridViewRow row in problemDataGridView.Rows)
             {
@@ -178,8 +178,8 @@ namespace LeetcodeManager.View
             int rowscnt = problemDataGridView.Rows.Count;
             if (problemInput.ShowDialog() == DialogResult.Cancel)
             {
-                if(rowscnt-1>=0)
-                   problemDataGridView.Rows.RemoveAt(rowscnt - 2);
+                if (rowscnt - 1 >= 0)
+                    problemDataGridView.Rows.RemoveAt(rowscnt - 2);
                 return;
             }
             Problem newproblem = problemInput.InputProblem;
@@ -195,6 +195,7 @@ namespace LeetcodeManager.View
             foreach (var str in tagnames) combinestr += str + ";";
             fillrow.Cells[5].Value = combinestr;
             fillrow.Cells[7].Value = newproblem.Tags;
+
             problemBindingNavigatorSaveItem_Click(problemDataGridView, null);
         }
 
@@ -202,12 +203,12 @@ namespace LeetcodeManager.View
         private void toolStripButtonEdit_Click(object sender, EventArgs e)
         {
             var selectrows = problemDataGridView.SelectedRows;
-            if(selectrows==null || selectrows.Count==0)
+            if (selectrows == null || selectrows.Count == 0)
             {
                 SysHelper.ShowMessageWarning("unselect any row, please select at least one row!");
                 return;
             }
-            foreach(DataGridViewRow row in selectrows)
+            foreach (DataGridViewRow row in selectrows)
             {
                 var frm = new ProblemInputForm(row.DataBoundItem as Problem);
                 if (frm.ShowDialog() == DialogResult.Cancel)
@@ -235,7 +236,7 @@ namespace LeetcodeManager.View
                 if (e.RowIndex < 0) return;
                 System.Diagnostics.Process.Start(problemDataGridView.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString());
             }
-           catch(Exception ex)
+            catch (Exception ex)
             {
                 SysHelper.ShowMessageWarning(ex.Message);
             }
@@ -256,7 +257,7 @@ namespace LeetcodeManager.View
             }
             problemBindingSource.DataSource = problems;
             problemDataGridView.Refresh();
-            
+
         }
 
         private void toolStripButton2_Click(object sender, EventArgs e)
@@ -287,7 +288,7 @@ namespace LeetcodeManager.View
                 }
                 SysHelper.ShowMessageOK("Import Okay!");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 SysHelper.ShowMessageWarning(ex.Message);
             }
@@ -296,8 +297,20 @@ namespace LeetcodeManager.View
 
         private void exportTemplateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-        }  
+            //|ID|Tags|Solution|
+            //|--|----|--------|
+            StringBuilder sb = new StringBuilder();
+            sb.Append("|ID|Tags|Solution|\n|--|----|--------|\n");
+            foreach (DataGridViewRow row in problemDataGridView.Rows)
+            {             
+                var p = row.DataBoundItem as Problem;
+                if (p == null) continue;
+                sb.Append(string.Format("|{0}|{1}|[{2}]({3})|\n", p.Number.Trim(), p.TagsCombine.Trim(), p.Title.Trim(), p.CsdnAddress.Trim()));
+            }
+            string filename = (treeViewTag.SelectedNode.Tag as Tag) != null ? (treeViewTag.SelectedNode.Tag as Tag).Name : Guid.NewGuid().ToString();
+            SysHelper.WriteFile(sb.ToString(), Environment.CurrentDirectory, filename);
+            SysHelper.ShowMessageOK("Export Success!");
+        }
 
         private void dataGridView1_RowStateChanged(object sender, DataGridViewRowStateChangedEventArgs e)
         {
@@ -306,18 +319,16 @@ namespace LeetcodeManager.View
 
         private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
         {
-            this.Validate();
-            _problemController.UpdateProblems(); //inlcude delete(this is the ability EF provides) 
-            problemDataGridView.Refresh();
+
         }
 
         private void toolStripTextBox1_TextChanged(object sender, EventArgs e)
         {
-            if(string.IsNullOrEmpty(toolStripTextBox1.Text))
+            if (string.IsNullOrEmpty(toolStripTextBox1.Text))
             {
-                if(treeViewTag.SelectedNode.Tag!=null)
+                if (treeViewTag.SelectedNode.Tag != null)
                 {
-                    problemBindingSource.DataSource = (treeViewTag.SelectedNode.Tag as Tag).Problems.OrderBy(r=>Convert.ToInt32(r.Number)).ToList();
+                    problemBindingSource.DataSource = (treeViewTag.SelectedNode.Tag as Tag).Problems.OrderBy(r => Convert.ToInt32(r.Number)).ToList();
                     problemDataGridView.Refresh();
                 }
                 else
@@ -334,6 +345,23 @@ namespace LeetcodeManager.View
                 problemDataGridView.Refresh();
             }
 
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            Validate();
+            var selectedrows = problemDataGridView.SelectedRows;
+            if (selectedrows.Count > 0)
+            {
+                if (DialogResult.No == MessageBox.Show("Are you sure to delete this row?", "LeetCodeManager", MessageBoxButtons.YesNo))
+                    return;
+            }
+            foreach (DataGridViewRow row in selectedrows)
+            {
+                _problemController.DeleteProblem(row.DataBoundItem as Problem);
+            }
+            problemBindingSource.DataSource = _problemController.GetAllProblems().OrderBy(r => Convert.ToInt32(r.Number)).ToList();
+            problemDataGridView.Refresh();
         }
 
 
