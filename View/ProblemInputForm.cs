@@ -96,6 +96,7 @@ namespace LeetcodeManager.View
             }
             if (_problem.Tags != null)
                 _problem.Tags.Clear();
+            else _problem.Tags = new List<Tag>();
             foreach (UltraGridRow row in this.ultraCombo1.CheckedRows)
             {              
                 //if (!_problem.Tags.Contains(tag))
